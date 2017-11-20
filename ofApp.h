@@ -34,15 +34,17 @@ class ofApp : public ofBaseApp{
 		float t;
 		bool animate;
 
-		ofVec3f p1StartPos, p1Pos, p1Vel;
-		ofVec3f p2StartPos, p2Pos, p2Vel;
-		ofVec3f distanceVector;
+		ofVec2f p1, p2;		// particle positions
+		ofVec2f v1, v2;		//vel before collision
+		ofVec2f u1, u2;		//vel after collision
+		ofVec2f d;			//unit vector distance between particles
+		float m1, m2, c, time;
+		ofVec2f momentum; //vector for momentum
+
 		float closingVel;
 
-		vector<float> distanceLine;
-		vector<float> closingVelLine;
-
-		const float MAX_TIME = 10.0f;
+		const float T_MIN = -5.0f;
+		const float T_MAX = 5.0f;
 		const float RANGE = 5.0f;
 		const float RADIUS = 0.2;
 

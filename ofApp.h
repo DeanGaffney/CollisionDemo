@@ -34,6 +34,8 @@ class ofApp : public ofBaseApp{
 		float t;
 		bool animate;
 
+		ofPath circlePath;		//path for creating cicrles on play area
+
 		ofVec2f p1, p2;		// particle positions
 		ofVec2f v1, v2;		//vel before collision
 		ofVec2f u1, u2;		//vel after collision

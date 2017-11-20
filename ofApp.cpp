@@ -57,6 +57,11 @@ void ofApp::draw(){
 		ofScale(demoArea.width / (2 * RANGE), -(demoArea.width / (2 * RANGE)), 1);
 		ofNoFill();
 		ofDrawRectangle(-RANGE, -RANGE, 2 * RANGE, 2 * RANGE);
+		ofSetCircleResolution(80);
+		for (int i = 0; i < 5; i++) {
+			ofSetColor((i % 2 == 0) ? ofColor::black : ofColor::white);
+			ofCircle(0, 0, i + 1);
+		}
 		ofFill();
 		//particle 1 attributes
 		ofSetColor(0, 0, 255);

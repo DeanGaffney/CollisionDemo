@@ -11,7 +11,8 @@ void ofApp::setup(){
 void ofApp::reset() {
 	t = T_MIN;
 	v1 = v2 = u1 = u2 = ofVec2f::zero();
-	m1 = m2 = 0.0f;
+	m1 = m2 = 1.0f;
+	c = 1.0f;
 	p1 = p2 = ofVec3f::zero();
 	d = (p1 - p2).normalize();
 	closingVel = 0.0f;
@@ -22,17 +23,23 @@ void ofApp::reset() {
 void ofApp::update(){
 	float dt = ofClamp(ofGetLastFrameTime(), 0.0, 0.02);
 
-	if (isRunning && dt > 0.0f && t < 0) {
+	if (isRunning && dt > 0.0f) {
 		t += dt;
-		p1 += dt * v1;
-		p2 += dt * v2;
+		if (t >= T_MAX) {
+			isRunning = false;
+			t = T_MIN;
+		}
 	}
-	else if (isRunning && dt > 0.0f && t >= 0.0f) {
-		t += dt;
-		p1 += dt * u1;
-		p2 += dt * u2;
+	if (t < 0.0f) {
+		p1 = t * v1;
+		p2 = t * v2;
+	}else {
+		p1 = t * u1;
+		p2 = t * u2;
 	}
-	if (t >= T_MAX) isRunning = false;
+
+	u1 = ((m1 - c * m2) / (m1 + m2)) * v1 + ((m2 * (1 + c)) / (m1 + m2)) * v2;
+	u2 = ((m1 * (1 + c)) / (m1 + m2)) * v1 + ((m2 - c * m1) / (m1 + m2)) * v2;
 
 	d = (p1 - p2).normalize();
 	closingVel = d.dot(v2 - v1);
@@ -69,7 +76,7 @@ void ofApp::draw(){
 		ofSetColor(0, 200, 0);
 		
 		//particle 2 attributes
-		ofSetColor(0, 0, 255);
+		ofSetColor(255, 0, 0);
 		ofDrawCircle(p2.x, p2.y, RADIUS);
 		ofSetColor(0, 200, 0);
 		ofSetColor(0, 0, 255);

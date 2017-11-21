@@ -40,7 +40,7 @@ class ofApp : public ofBaseApp{
 		ofVec2f v1, v2;		//vel before collision
 		ofVec2f u1, u2;		//vel after collision
 		ofVec2f d;			//unit vector distance between particles
-		float m1, m2, c, time;
+		float m1, m2, c;
 		ofVec2f momentum; //vector for momentum
 
 		float closingVel;

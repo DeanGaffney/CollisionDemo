@@ -91,15 +91,15 @@ void ofApp::drawMainWindow() {
 
 		ImGui::Text("Particle 1:");
 
-		ImGui::SliderFloat2("v1", &v1.x, -1.0f, 1.0f);
-		ImGui::SliderFloat("m1", &m1, 1.0f, 100.0f);
+		ImGui::SliderFloat2("v1", &v1.x, VEL_MIN, VEL_MAX);
+		ImGui::SliderFloat("m1", &m1, MASS_MIN, MASS_MAX);
 
 		ImGui::Text("Particle 2:");
 
-		ImGui::SliderFloat2("v2", &v2.x, -1.0f, 1.0f);
-		ImGui::SliderFloat("m2", &m2, 1.0f, 100.0f);
+		ImGui::SliderFloat2("v2", &v2.x, VEL_MIN, VEL_MAX);
+		ImGui::SliderFloat("m2", &m2, MASS_MIN, MASS_MAX);
 
-		ImGui::SliderFloat("c", &c, 0.0f, 1.0f);
+		ImGui::SliderFloat("c", &c, C_MIN, C_MAX);
 
 		if (ImGui::Button("Reset")) reset();
 		ImGui::SameLine();
@@ -125,22 +125,48 @@ void ofApp::drawMainWindow() {
 
 		if (ImGui::CollapsingHeader("Tests")) {
 			if (ImGui::Button("1D Elastic, p2 fixed (x-axis)")) {
-
+				c = C_MAX;
+				v1 = ofVec2f(VEL_MIN, VEL_MAX);
+				v2 = ofVec2f::zero();
+				m1, m2 = MASS_MAX / 2;
+				t = T_MIN;
 			}
 			if (ImGui::Button("1D Plastic, p2 fixed (x-axis)")) {
-
+				c = C_MIN;
+				v1 = ofVec2f(VEL_MIN, VEL_MAX);
+				v2 = ofVec2f::zero();
+				m1, m2 = MASS_MAX / 2;
+				t = T_MIN;
 			}
 			if (ImGui::Button("1D p2 fixed (x-axis) m1=H m2=L")) {
-
+				c = C_MAX / 2;
+				m1 = MASS_MAX;
+				m2 = MASS_MIN;
+				v1 = ofVec2f(VEL_MIN, VEL_MAX);
+				v2 = ofVec2f::zero();
+				t = T_MIN;
 			}
 			if (ImGui::Button("1D p2 fixed (x-axis) m1=L m2=H")) {
-
+				c = C_MAX / 2;
+				m1 = MASS_MIN;
+				m2 = MASS_MAX;
+				v1 = ofVec2f(VEL_MIN, VEL_MAX);
+				v2 = ofVec2f::zero();
+				t = T_MIN;
 			}
 			if (ImGui::Button("NW + SW Elastic")) {
-
+				c = C_MAX;
+				m1, m2 = MASS_MAX / 2;
+				v1 = ofVec2f(VEL_MIN, VEL_MAX);
+				v2 = ofVec2f(VEL_MIN, VEL_MIN);
+				t = T_MIN;
 			}
 			if (ImGui::Button("NW + SW Plastic")) {
-
+				c = C_MIN;
+				m1, m2 = MASS_MAX / 2;
+				v1 = ofVec2f(VEL_MIN, VEL_MAX);
+				v2 = ofVec2f(VEL_MIN, VEL_MIN);
+				t = T_MIN;
 			}
 		}
 	}

@@ -45,6 +45,15 @@ class ofApp : public ofBaseApp{
 
 		float closingVel;
 
+		const float C_MIN = 0.0f;
+		const float C_MAX = 1.0f;
+
+		const float VEL_MIN = -1.0f;
+		const float VEL_MAX = 1.0f;
+
+		const float MASS_MIN = 1.0f;
+		const float MASS_MAX = 100.0f;
+
 		const float T_MIN = -5.0f;
 		const float T_MAX = 5.0f;
 		const float RANGE = 5.0f;
